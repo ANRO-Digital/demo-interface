@@ -1,5 +1,5 @@
 import React from 'react';
-import {Accordion, Group, Stack, Text} from "@mantine/core";
+import {Accordion, Stack, Text} from "@mantine/core";
 
 const CanbanTask = ({data}) => {
     const formattedDate = (isoDateString) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Accordion, Card, Grid, Title} from "@mantine/core";
+import {Accordion, Grid, Title} from "@mantine/core";
 import statuses from "../data/statuses.json";
 import data from "../data/dropdownPageData.json";
 import CanbanTask from "../components/CanbanTask";
