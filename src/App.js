@@ -1,9 +1,10 @@
 import './App.css';
-import {Container, MantineProvider, Tabs, Text} from "@mantine/core";
+import {Container, MantineProvider, Tabs, Text, useMantineColorScheme} from "@mantine/core";
 import {useState} from "react";
 import ActiveLinkPage from "./pages/ActiveLinkPage";
 import '@mantine/core/styles.css';
 import DropdownPage from "./pages/DropdownPage";
+import ThemeSwitcher from "./components/ThemeSwitcher";
 
 function App() {
     const [activeTab, setActiveTab] = useState('');
@@ -11,16 +12,17 @@ function App() {
     return (
         <MantineProvider>
             <Container fluid className="container">
+                <ThemeSwitcher/>
                 <Tabs value={activeTab} onChange={setActiveTab} color="violet" radius="md">
                     <Tabs.List>
                         <Tabs.Tab value="active">
                             <Text size="20px">
-                                Active Link
+                                Покупка пакета
                             </Text>
                         </Tabs.Tab>
                         <Tabs.Tab value="dropdown">
                             <Text size="20px">
-                                Dropdown
+                                Канбан
                             </Text>
                         </Tabs.Tab>
                     </Tabs.List>
