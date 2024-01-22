@@ -4,7 +4,7 @@ export const fetchInit = async () => {
     try {
         const response = await $authHost.get('/init');
         if (response.data) {
-            window.location.href = response.data.authorizationUrl;
+            window.location.href = response.data.auth_link;
         }
     } catch (error) {
         console.error('An error occurred while fetching the init page', error);

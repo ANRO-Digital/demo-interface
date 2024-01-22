@@ -8,12 +8,10 @@ import Header from "./components/Header";
 
 function App() {
     return (
-        <MantineProvider>
-            <BrowserRouter>
-                <Header/>
-                <AppRouter/>
-            </BrowserRouter>
-        </MantineProvider>
+        <BrowserRouter>
+            <Header/>
+            <AppRouter/>
+        </BrowserRouter>
     );
 }
 

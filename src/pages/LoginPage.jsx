@@ -9,6 +9,7 @@ import {
 } from '@mantine/core';
 import {authenticateUser} from "../api/loginAPI";
 import {useNavigate} from "react-router-dom";
+import {notifications} from "@mantine/notifications";
 
 const LoginPage = (props) => {
     const navigate = useNavigate();
@@ -22,14 +23,10 @@ const LoginPage = (props) => {
     });
 
     const handleLogin = async () => {
-        // const isAuthenticated = await authenticateUser(form.values.username, form.values.password);
-        // if (isAuthenticated) {
-        //     navigate('/dashboard');
-        // }
-
-        navigate('/dashboard');
-        //тут обращение на /auth/jwt/login
-        //пока просто редирект на дашборд потому что нет данных для авторизации
+        const isAuthenticated = await authenticateUser(form.values.username, form.values.password);
+        if (isAuthenticated) {
+            navigate('/dashboard');
+        }
     };
 
     return (
