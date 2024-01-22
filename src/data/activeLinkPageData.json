@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Стандарт",
+    "paymentOrders": 500,
+    "priceForOneItem": 10,
+    "price": 5000
+  },
+  {
+    "name": "Расширенный",
+    "paymentOrders": 1500,
+    "priceForOneItem": 8,
+    "price": 12000
+  },
+  {
+    "name": "Премиум",
+    "paymentOrders": 5000,
+    "priceForOneItem": 6,
+    "price": 30000
+  },
+  {
+    "name": "Экспертный",
+    "paymentOrders": 10000,
+    "priceForOneItem": 5,
+    "price": 50000
+  }
+]
