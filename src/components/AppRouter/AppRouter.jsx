@@ -1,41 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import LoginPage from "../../pages/LoginPage";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import Dashboard from "../../pages/Dashboard";
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
+import {observer} from "mobx-react-lite";
+import {Context} from "../../index";
+import {authRoutes, publicRoutes} from "../../routes/routes";
 
-const AppRouter = () => {
-
-    const [auth, setAuth] = useState(false)
-    const isAuthenticated = () => {
-        const token = localStorage.getItem('token');
-        return !!token;
-    };
-
-    useEffect(() => {
-        isAuthenticated()
-        if(isAuthenticated()) {
-            setAuth(true)
-        }
-        console.log('auuuuuuuuuu ' + auth)
-
-    }, [localStorage.getItem('token')]);
+const AppRouter = observer(() => {
+    const {user} = useContext(Context)
+    console.log(user.isAuth)
 
     return (
         <Routes>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route
-                path="/dashboard"
-                element={
-                    <PrivateRoute isAuthenticated={auth}>
-                        <Dashboard/>
-                    </PrivateRoute>
-                }
-            />
-            <Route path="/" element={<Navigate to="/login" replace/>}/>
+            {user.isAuth && authRoutes.map(({ path, Component }) => (
+                <Route key={path} path={path} element={<Component />} />
+            ))}
+            {publicRoutes.map(({ path, Component }) => (
+                <Route key={path} path={path} element={<Component />} />
+            ))}
+            <Route path="*" element={<LoginPage />} />
 
         </Routes>
     );
-};
+});
 
 export default AppRouter;

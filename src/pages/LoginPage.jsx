@@ -9,10 +9,13 @@ import {
 } from '@mantine/core';
 import {authenticateUser} from "../api/loginAPI";
 import {useNavigate} from "react-router-dom";
-import {notifications} from "@mantine/notifications";
+import {observer} from "mobx-react-lite";
+import {useContext} from "react";
+import {Context} from "../index";
 
-const LoginPage = (props) => {
+const LoginPage = observer((props) => {
     const navigate = useNavigate();
+    const {user} = useContext(Context)
 
     const form = useForm({
         initialValues: {
@@ -25,6 +28,7 @@ const LoginPage = (props) => {
     const handleLogin = async () => {
         const isAuthenticated = await authenticateUser(form.values.username, form.values.password);
         if (isAuthenticated) {
+            user.setIsAuth(true);
             navigate('/dashboard');
         }
     };
@@ -62,6 +66,6 @@ const LoginPage = (props) => {
             </form>
         </Container>
     );
-}
+});
 
 export default LoginPage;
