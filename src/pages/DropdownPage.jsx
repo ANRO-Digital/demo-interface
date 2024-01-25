@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Accordion, Grid, Title, useMantineTheme, useMantineColorScheme} from "@mantine/core";
+import {Accordion, Grid, Title, useMantineTheme, useMantineColorScheme, Button, FileButton, Stack} from "@mantine/core";
 import statuses from "../data/statuses.json";
 import data from "../data/dropdownPageData.json";
 import CanbanTask from "../components/CanbanTask";
+import { v4 as uuidv4 } from 'uuid';
+import {recognizeAccountFile} from "../api/accountsAPI";
+import { saveAs } from 'file-saver';
 
 const DropdownPage = () => {
     const {colorScheme} = useMantineColorScheme();
@@ -11,12 +14,59 @@ const DropdownPage = () => {
         darker: theme.colors.gray[1],
         item: theme.colors.gray[0],
     });
+    const [file, setFile] = useState(null);
+
 
     useEffect(() => {
         const darkerBackground = colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1];
         const itemBackground = colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0];
         setBackgroundColors({darker: darkerBackground, item: itemBackground});
     }, [colorScheme, theme.colors.dark, theme.colors.gray]);
+
+    const loadFile = async () => {
+        const config = {
+            headers: {
+                'Content-Type': `multipart/form-data;`,
+                'elementId': `${uuidv4()}`,
+            },
+        };
+        const formData = new FormData();
+        try{
+            formData.append('file', file)
+            console.log(formData)
+
+            const rec = await recognizeAccountFile(formData, config)
+            if(rec) {
+                const recognition = {
+                    id: uuidv4(),
+                    category: 1,
+                    ...rec,
+                    amount: rec.amount.split('\\')[0],
+                }
+
+                appendDataToFile(recognition, data)
+            }
+        }
+        catch (err) {
+            console.error(err)
+        }
+    }
+
+    const appendDataToFile = (jsonData,filename) => {
+        const newData = JSON.stringify([...filename, jsonData]);
+        const blob = new Blob([newData], {type: "text/plain;charset=utf-8"});
+        saveAs(blob, "dropdownPageData.json");
+    }
+
+    const handleSave = (updatedData) => {
+        const updatedIndex = data.findIndex(item => item.id === updatedData.id);
+        const newData = [...data];
+        newData[updatedIndex] = updatedData;
+
+        const newDataStr = JSON.stringify(newData);
+        const blob = new Blob([newDataStr], {type: "text/plain;charset=utf-8"});
+        saveAs(blob, "dropdownPageData.json");
+    }
 
     return (
         <>
@@ -37,7 +87,7 @@ const DropdownPage = () => {
                                         content: {backgroundColor: backgroundColors.item},
                                     }}>
                                         {data.map(task => (
-                                            task.category === item.id && <CanbanTask key={task.id} data={task}/>
+                                            task.category === item.id && <CanbanTask key={task.id} data={task} onSave={handleSave}/>
                                         ))}
                                     </Accordion>
                                 </Grid.Col>
@@ -46,6 +96,14 @@ const DropdownPage = () => {
                     );
                 })}
             </Grid>
+            <Stack mt={20} gap="xl" w={250}>
+                <FileButton onChange={setFile} accept="application/pdf" >
+                    {(props) => <Button {...props}>Загрузка демо PDF</Button>}
+                </FileButton>
+
+                <Button onClick={loadFile}>Отправить на распознавание</Button>
+            </Stack>
+
         </>
     );
 };
