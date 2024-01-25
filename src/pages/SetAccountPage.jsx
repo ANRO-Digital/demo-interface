@@ -4,6 +4,7 @@ import data from '../data/activeLinkPageData.json'
 import {useNavigate} from "react-router-dom";
 import {getCurrentAccounts, recordCurrentAccount} from "../api/accountsAPI";
 import {Context} from "../index";
+import {getPackages} from "../api/packagesAPI";
 
 const SetAccountPage = () => {
     const {account} = useContext(Context)
@@ -13,6 +14,7 @@ const SetAccountPage = () => {
     const [accounts, setAccounts] = useState([])
     const packages = data.map(plan => ({value: plan.price.toString(), label: plan.name}))
     const [selectedNumber, setSelectedNumber] = useState('');
+    const [company, setCompany] = useState({})
 
     const [packageName, setPackageName] = useState({
         packageType: account.package.packagePrice.toString(),
@@ -22,6 +24,9 @@ const SetAccountPage = () => {
     useEffect(() => {
         getCurrentAccounts().then(accs => {
             setAccounts(accs)
+        })
+        getPackages().then(packs => {
+            setCompany(packs)
             setLoading(false)
         })
     }, []);
@@ -43,11 +48,21 @@ const SetAccountPage = () => {
 
 
     return (
-        <Container size="sm">
+        <Container size="xs" mx={50}>
             <Card shadow="sm" padding="lg" radius="md" withBorder mt="20px">
                 <Stack>
-                    <Text>Наименование компании</Text>
-                    <Text>ИНН</Text>
+                    <Group justify="space-between">
+                        <Text>Наименование компании</Text>
+                        <Text>{company.name}</Text>
+                    </Group>
+                    <Group justify="space-between">
+                        <Text>ИНН</Text>
+                        <Text>{company.inn}</Text>
+                    </Group>
+                    <Group justify="space-between">
+                        <Text>Количество оплат</Text>
+                        <Text>{company.packages}</Text>
+                    </Group>
                     <Group>
                         <Text>Остаток пакетов</Text>
                         <Select placeholder="Выбор пакета"
@@ -83,7 +98,7 @@ const SetAccountPage = () => {
                         Подтвердить выбор счета
                     </Button>
 
-                    <Button color="red" w="15%" onClick={() => navigate('/dashboard')}>Выход</Button>
+                    <Button color="red" w="25%" onClick={() => navigate('/dashboard')}>Выход</Button>
                 </Stack>
 
             </Card>

@@ -17,7 +17,7 @@ const Dashboard = () => {
                     </Tabs.Tab>
                     <Tabs.Tab value="dropdown">
                         <Text size="20px">
-                            Канбан
+                            Счета
                         </Text>
                     </Tabs.Tab>
                 </Tabs.List>

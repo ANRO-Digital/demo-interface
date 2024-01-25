@@ -3,9 +3,10 @@ import {Accordion, Grid, Title, useMantineTheme, useMantineColorScheme, Button, 
 import statuses from "../data/statuses.json";
 import data from "../data/dropdownPageData.json";
 import CanbanTask from "../components/CanbanTask";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import {recognizeAccountFile} from "../api/accountsAPI";
-import { saveAs } from 'file-saver';
+import {saveAs} from 'file-saver';
+import SetAccountPage from "./SetAccountPage";
 
 const DropdownPage = () => {
     const {colorScheme} = useMantineColorScheme();
@@ -31,28 +32,27 @@ const DropdownPage = () => {
             },
         };
         const formData = new FormData();
-        try{
+        try {
             formData.append('file', file)
             console.log(formData)
 
             const rec = await recognizeAccountFile(formData, config)
-            if(rec) {
+            if (rec) {
                 const recognition = {
                     id: uuidv4(),
                     category: 1,
-                    ...rec,
                     amount: rec.amount.split('\\')[0],
+                    ...rec,
                 }
 
                 appendDataToFile(recognition, data)
             }
-        }
-        catch (err) {
+        } catch (err) {
             console.error(err)
         }
     }
 
-    const appendDataToFile = (jsonData,filename) => {
+    const appendDataToFile = (jsonData, filename) => {
         const newData = JSON.stringify([...filename, jsonData]);
         const blob = new Blob([newData], {type: "text/plain;charset=utf-8"});
         saveAs(blob, "dropdownPageData.json");
@@ -70,40 +70,48 @@ const DropdownPage = () => {
 
     return (
         <>
-            <Grid columns={3} mt="50px" mx="300px" justify="center" align="flex-start" gutter="xl">
-                {statuses.map(item => {
-                    const taskCount = data.filter(task => task.category === item.id).length;
-
-                    return (
-                        <Grid.Col span={1} key={item.id}>
-                            <Grid columns={1} miw="30%">
-                                <Grid.Col span={1} key={item.id} className="canbanColumn" style={{backgroundColor: backgroundColors.darker}}>
-                                    <Title order={3} mb="20px">
-                                        {item.status} ({taskCount})
-                                    </Title>
-                                    <Accordion variant="separated" multiple styles={{
-                                        item: {backgroundColor: backgroundColors.item},
-                                        itemOpened: {backgroundColor: backgroundColors.item},
-                                        content: {backgroundColor: backgroundColors.item},
-                                    }}>
-                                        {data.map(task => (
-                                            task.category === item.id && <CanbanTask key={task.id} data={task} onSave={handleSave}/>
-                                        ))}
-                                    </Accordion>
-                                </Grid.Col>
-                            </Grid>
-                        </Grid.Col>
-                    );
-                })}
-            </Grid>
             <Stack mt={20} gap="xl" w={250}>
-                <FileButton onChange={setFile} accept="application/pdf" >
+                <FileButton onChange={setFile} accept="application/pdf">
                     {(props) => <Button {...props}>Загрузка демо PDF</Button>}
                 </FileButton>
 
                 <Button onClick={loadFile}>Отправить на распознавание</Button>
             </Stack>
+            <Grid columns={3} mt="50px">
+                <Grid.Col span={1}>
+                    <SetAccountPage/>
+                </Grid.Col>
+                <Grid.Col span={2}>
+                    <Grid columns={3} justify="center" align="flex-start" gutter="xl">
+                        {statuses.map(item => {
+                            const taskCount = data.filter(task => task.category === item.id).length;
 
+                            return (
+                                <Grid.Col span={1} key={item.id}>
+                                    <Grid columns={1} miw="30%">
+                                        <Grid.Col span={1} key={item.id} className="canbanColumn"
+                                                  style={{backgroundColor: backgroundColors.darker}}>
+                                            <Title order={3} mb="20px">
+                                                {item.status} ({taskCount})
+                                            </Title>
+                                            <Accordion variant="separated" multiple styles={{
+                                                item: {backgroundColor: backgroundColors.item},
+                                                itemOpened: {backgroundColor: backgroundColors.item},
+                                                content: {backgroundColor: backgroundColors.item},
+                                            }}>
+                                                {data.map(task => (
+                                                    task.category === item.id &&
+                                                    <CanbanTask key={task.id} data={task} onSave={handleSave}/>
+                                                ))}
+                                            </Accordion>
+                                        </Grid.Col>
+                                    </Grid>
+                                </Grid.Col>
+                            );
+                        })}
+                    </Grid>
+                </Grid.Col>
+            </Grid>
         </>
     );
 };

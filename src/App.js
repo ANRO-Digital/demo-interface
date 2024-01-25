@@ -1,5 +1,6 @@
 import './App.css';
 import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 import AppRouter from "./components/AppRouter/AppRouter";
 import {BrowserRouter} from "react-router-dom";
 import Header from "./components/Header";

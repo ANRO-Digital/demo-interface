@@ -1,1 +1,104 @@
-[{"id":1,"payeeName":"ООО СДЭК-ГЛОБАЛ (demo)","price":"6210.5","link":"","createdAt":"2012-04-23T12:03:00.511Z","updatedAt":"2012-04-23T12:07:00.511Z","category":1},{"id":2,"payeeName":"ООО СДЭК-ГЛОБАЛ (demo)","price":2210.5,"link":"","createdAt":"2012-04-23T12:03:00.511Z","updatedAt":"2012-04-23T12:08:00.511Z","category":1},{"id":3,"payeeName":"ООО СДЭК-ГЛОБАЛ (demo)","price":2210.5,"link":"","createdAt":"2012-04-23T12:03:00.511Z","updatedAt":"2012-04-23T12:09:00.511Z","category":1},{"id":4,"payeeName":"ООО СДЭК-ГЛОБАЛ (demo)","price":2210.5,"link":"","createdAt":"2012-04-23T12:03:00.511Z","updatedAt":"2012-04-23T13:03:00.511Z","category":2},{"id":5,"payeeName":"ООО СДЭК-ГЛОБАЛ (demo)","price":2210.5,"link":"","createdAt":"2012-04-23T12:03:00.511Z","updatedAt":"2012-04-23T14:03:00.511Z","category":2},{"id":6,"payeeName":"ООО СДЭК-ГЛОБАЛ (demo)","price":2210.5,"link":"","createdAt":"2012-04-23T16:03:00.511Z","updatedAt":"2012-04-23T17:03:00.511Z","category":3},{"id":"d66f8077-dd45-40d4-b862-5225751ee47e","category":1,"payeeName":"ООО \"ДЕЛОВЫЕ ЛИНИИ\"","payeeInn":"7826156685","payeeKpp":"997650001","payeeBankBic":"044030653","amount":"286.00","payeeAccount":"40702810455100183526","payeeBankCorrAccount":"30101810500000000653","purpose":"22-00295028227","date":"28.04.22","vat":{"amount":"44.00","type":"not found"}}]
+[
+  {
+    "id": "7d88884a-8f6f-4e24-b054-a406de31664c",
+    "category": 1,
+    "payeeName": "ООО \"ДЕЛОВЫЕ ЛИНИИ\"",
+    "payeeInn": "7826156685",
+    "payeeKpp": "997650001",
+    "payeeBankBic": "044030653",
+    "amount": "286.00",
+    "payeeAccount": "40702810455100183526",
+    "payeeBankCorrAccount": "30101810500000000653",
+    "purpose": "22-00295028227",
+    "date": "06.04.22",
+    "vat": {
+      "amount": "44.00",
+      "type": "not found"
+    }
+  },
+  {
+    "id": "363a7968-fd3d-4513-80b1-b8441b8ea45a",
+    "category": 2,
+    "payeeName": "ООО \"ДЕЛОВЫЕ ЛИНИИ\"",
+    "payeeInn": "7826156685",
+    "payeeKpp": "997650001",
+    "payeeBankBic": "044030653",
+    "amount": "286.00",
+    "payeeAccount": "40702810455100183526",
+    "payeeBankCorrAccount": "30101810500000000653",
+    "purpose": "22-00295028227",
+    "date": "28.04.22",
+    "vat": {
+      "amount": "44.00",
+      "type": "not found"
+    }
+  },
+  {
+    "id": "4d371021-feb2-4b8a-81e9-e2a8a93b8337",
+    "category": 2,
+    "payeeName": "ООО \"ДЕЛОВЫЕ ЛИНИИ\"",
+    "payeeInn": "7826156685",
+    "payeeKpp": "997650001",
+    "payeeBankBic": "044030653",
+    "amount": "286.00",
+    "payeeAccount": "40702810455100183526",
+    "payeeBankCorrAccount": "30101810500000000653",
+    "purpose": "22-00295028227",
+    "date": "28.04.22",
+    "vat": {
+      "amount": "44.00",
+      "type": "not found"
+    }
+  },
+  {
+    "id": "a4f121af-d939-4f0d-a975-fb4096d68eda",
+    "category": 3,
+    "payeeName": "ООО \"ДЕЛОВЫЕ ЛИНИИ\"",
+    "payeeInn": "7826156685",
+    "payeeKpp": "997650001",
+    "payeeBankBic": "044030653",
+    "amount": "286.00",
+    "payeeAccount": "40702810455100183526",
+    "payeeBankCorrAccount": "30101810500000000653",
+    "purpose": "22-00295028227",
+    "date": "28.04.22",
+    "vat": {
+      "amount": "44.00",
+      "type": "not found"
+    }
+  },
+  {
+    "id": "d66f8077-dd45-40d4-b862-5225751ee47e",
+    "category": 1,
+    "payeeName": "ООО \"ДЕЛОВЫЕ ЛИНИИ\"",
+    "payeeInn": "7826156685",
+    "payeeKpp": "997650001",
+    "payeeBankBic": "044030653",
+    "amount": "286.00",
+    "payeeAccount": "40702810455100183526",
+    "payeeBankCorrAccount": "30101810500000000653",
+    "purpose": "22-00295028227",
+    "date": "28.04.22",
+    "vat": {
+      "amount": "44.00",
+      "type": "not found"
+    }
+  },
+  {
+    "id": "de950fd2-c52e-439d-b4e6-0c496169661c",
+    "category": 1,
+    "payeeName": "ООО \"ДЕЛОВЫЕ ЛИНИИ\"",
+    "payeeInn": "7826156685",
+    "payeeKpp": "997650001",
+    "payeeBankBic": "044030653",
+    "amount": "286.00",
+    "payeeAccount": "40702810455100183526",
+    "payeeBankCorrAccount": "30101810500000000653",
+    "purpose": "22-00295028227",
+    "date": "26.04.22",
+    "vat": {
+      "amount": "44.00",
+      "type": "not found"
+    }
+  }
+]
