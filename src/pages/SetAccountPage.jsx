@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {getCurrentAccounts, recordCurrentAccount} from "../api/accountsAPI";
 import {Context} from "../index";
 import {getPackages} from "../api/packagesAPI";
+import {notifications} from "@mantine/notifications";
 
 const SetAccountPage = () => {
     const {account} = useContext(Context)
@@ -49,7 +50,7 @@ const SetAccountPage = () => {
 
     return (
         <Container size="xs" mx={50}>
-            <Card shadow="sm" padding="lg" radius="md" withBorder mt="20px">
+            <Card shadow="sm" padding="lg" radius="md" withBorder mt={3}>
                 <Stack>
                     <Group justify="space-between">
                         <Text>Наименование компании</Text>
@@ -93,7 +94,12 @@ const SetAccountPage = () => {
                     </div>
                     <Button variant="outline" color="violet" disabled={!selectedNumber}
                             onClick={() => {
-                                recordCurrentAccount(selectedNumber).then(r => console.log(r))
+                                recordCurrentAccount(selectedNumber).then(r =>
+                                    notifications.show({
+                                        title: 'Success',
+                                        message: `Account successfully confirmed`,
+                                        color: 'green',
+                                    }))
                             }}>
                         Подтвердить выбор счета
                     </Button>

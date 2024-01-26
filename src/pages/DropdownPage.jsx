@@ -78,7 +78,7 @@ const DropdownPage = () => {
                 <Button onClick={loadFile}>Отправить на распознавание</Button>
             </Stack>
             <Grid columns={3} mt="50px">
-                <Grid.Col span={1}>
+                <Grid.Col span={1} mt={0}>
                     <SetAccountPage/>
                 </Grid.Col>
                 <Grid.Col span={2}>

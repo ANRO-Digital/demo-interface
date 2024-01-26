@@ -12,4 +12,9 @@ const authInterceptor = (config) => {
     return config
 }
 
+export const amountInterceptor = (config, amount) => {
+    config.headers['amount'] = amount;
+    return config;
+}
+
 $authHost.interceptors.request.use(authInterceptor)
